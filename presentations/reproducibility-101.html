@@ -243,7 +243,7 @@ getwd()
 ```
 
 ```
-## [1] "/Users/danovan/teaching/reproducible-workflow/presentations"
+## [1] "/Users/danovan/projects/projects-with-github/presentations"
 ```
 
 ---
@@ -261,7 +261,10 @@ here::dr_here()
 ```
 
 ```
-## here() starts at /Users/danovan/teaching/reproducible-workflow, because it contains a file matching `[.]Rproj$` with contents matching `^Version: ` in the first line
+## here() starts at /Users/danovan/projects/projects-with-github.
+## - This directory contains a file matching "[.]Rproj$" with contents matching "^Version: " in the first line
+## - Initial working directory: /Users/danovan/projects/projects-with-github/presentations
+## - Current working directory: /Users/danovan/projects/projects-with-github/presentations
 ```
 
 
@@ -273,7 +276,7 @@ here::here("data","hake.csv")
 ```
 
 ```
-## [1] "/Users/danovan/teaching/reproducible-workflow/data/hake.csv"
+## [1] "/Users/danovan/projects/projects-with-github/data/hake.csv"
 ```
 
 Looks for...
@@ -316,9 +319,8 @@ hake &lt;- read.csv(here("home-folder","Place-With_Data","hake.csv"))
 ```
 
 ```
-## Warning in file(file, "rt"): cannot open file '/Users/danovan/teaching/
-## reproducible-workflow/home-folder/Place-With_Data/hake.csv': No such file or
-## directory
+## Warning in file(file, "rt"): cannot open file '/Users/danovan/projects/projects-
+## with-github/home-folder/Place-With_Data/hake.csv': No such file or directory
 ```
 
 ```
@@ -463,6 +465,7 @@ Docker won't save you from fundamental hardware problems (e.g. if a given progra
 We don't have time to cover Docker here, and unfortunately it's a bit complicated.
   - Worth it if you're writing complicated code that needs to be reproduced on a wide variety of machines
   - Otherwise, I'd stick with the workflow outlined here, but inclued clear instructions in the project README detailing all the non-R steps that need to be taken
+
 
 ---
 
