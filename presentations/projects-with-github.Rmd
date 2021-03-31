@@ -16,7 +16,7 @@ output:
 ```{r setup, include=FALSE}
 options(htmltools.dir.version = FALSE)
 
-knitr::opts_chunk$set(echo = TRUE, message = TRUE, warning = TRUE)
+knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE)
 library(here)
 library(xaringan)
 library(TMB)
@@ -99,7 +99,64 @@ class: center, middle, inverse
 
 ---
 
-# [Project-Oriented Workflows](https://www.tidyverse.org/blog/2017/12/workflow-vs-script/)
+
+# Does This Look Familiar?
+
+```{r, echo = FALSE}
+knitr::include_graphics(here("presentations","imgs","oh-my.png"))
+```
+
+
+---
+
+# Does This Look Familiar?
+
+.pull-left[
+
+- Multiple different projects in one folder
+- No subfolder organization
+- Stored in Google Drive
+- Version control via file naming
+- Manually modified data
+- Results saved as .xlsx and manually versioned by name
+
+
+].pull-right[
+
+```{r, echo = FALSE}
+knitr::include_graphics(here("presentations","imgs","oh-my.png"))
+
+```
+
+]
+
+---
+
+# What's Wrong With this?
+
+.pull-left[
+
+- Nothing if it's for your personal stuff!
+
+- Version control via file naming is not stable
+  - "ohhh, you used v5? Sorry the correct one is v2.3-FINAL
+  - No connection between state of code that generated results and results
+- No clear organization for other users to follow
+- **Google Drive / whatever and Git/GitHub don't play nice together**
+
+
+].pull-right[
+
+```{r, echo = FALSE}
+knitr::include_graphics(here("presentations","imgs","oh-my.png"))
+
+```
+
+]
+
+---
+
+# The Solution: [Project-Oriented Workflows](https://www.tidyverse.org/blog/2017/12/workflow-vs-script/)
 
 >This convention guarantees that the project can be moved around on your computer or onto other computers and will still “just work” `r tufte::quote_footer('--- Jenny Bryan')`
 
@@ -112,12 +169,22 @@ class: center, middle, inverse
   - Working directory set to project directory
 ---
 
-# Project-Oriented Workflows
+# The Solution: Project-Oriented Workflows
 see [Good Enough Practices in Scientific Computing](https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1005510)
 ![https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1005510](https://github.com/super-advanced-r-fall-2019/intro/raw/master/imgs/good-enough.png)
 
 & 
  
+---
+
+
+# Project Oriented Workflow
+
+```{r, echo = FALSE}
+knitr::include_graphics(here("presentations","imgs","better.png"))
+
+```
+
 ---
 
 # Purge `setwd` from your scripts
@@ -275,22 +342,37 @@ hake <- read.csv(here("home-folder","Place-With_Data","hake.csv"))
 
 ---
 
+# Project Oriented Workflows
+
+The Ideal: 
+
+.center[*Any user should be able to reproduce the project on any computer with only the materials in the project folder, without changing any code*]
+
+
+Obviously easier said than done, but this is what we're aiming for. 
+
+Now we'll see how Git + GitHub can help make this happen
+
+---
+
 
 # Git and GitHub are Great
 
 .pull-left[
 
-  - Make getting to the final product easier and safer
-  - Allow others to easily use your results
-  - Allows you to easily version your results
-  
-From a pure *reproducibility* perspective though, not strictly needed
+- Provides a clear and consistent way to version your results
 
-- Could use email/dropbox/whatever to manage all your versions
+- Allow others to easily reproduce your results
 
-- Publish the final reproducible code and results to say figshare without git/GitHub
+- Enables efficient and safe collaboration
 
-So, we're not going to focus on git here today
+- Gives you a time machine for your results
+
+But, at first glance it seems like a lot of work that couldbe done easier with Google Drive / email / track changes
+
+We'll try and demystify it a bit today
+
+**Git Materials largely drawn with permission from Lee Qi's excellent intro available [here](https://github.com/super-advanced-r-fall-2019/git-and-github) **
   
 
 
@@ -304,6 +386,165 @@ knitr::include_graphics("http://swcarpentry.github.io/git-novice/fig/phd101212s.
 
 ---
 
+# What is Git?
+
+Git is to GitHub what R is to RStudio
+
+
+Git was originally developed by Linus Torvalds for development of the Linux kernel
+  - Hence, interacting with Git only via the command line and the help files can feel... [confusing](https://git-man-page-generator.lokaltog.net/#Zml4JCRmaWxl)
+  
+Git is a software package for tracking changes in files in an organized way.  
+  - Create snapshots of the code at specific moments in time via "commits"
+  - Use commits to merge together different versions of the same code / resolve conflicts
+  - Allow for development across multiple "branches" of a project
+  - And lots of other fun stuff
+  
+  
+
+
+---
+
+
+# Why use version control?
+
+```{r out.width = '50%'}
+knitr::include_graphics("http://swcarpentry.github.io/git-novice/fig/phd101212s.png") 
+```
+
+---
+
+.pull-left[
+# Git
+
+```{r out.width = '50%', echo = FALSE}
+knitr::include_graphics("https://git-scm.com/images/logo@2x.png") 
+```
+
+1. Local version control
+
+1. From the command line or used with third party GUIs
+
+1. Self-contained records of code
+]
+
+.pull-right[
+# GitHub
+
+```{r out.width = '20%', echo = FALSE}
+knitr::include_graphics("https://logos-download.com/wp-content/uploads/2016/09/GitHub_logo.png") 
+```
+
+1. Cloud-based hosting platform
+
+1. Intuitive graphical web user interface
+
+1. Designed for sharing and collaboration
+]
+
+---
+## Why use
+
+.pull-left[
+
+```{r out.width = '50%', echo = FALSE}
+# url
+knitr::include_graphics("https://git-scm.com/images/logo@2x.png") 
+```
+
+Keep track of your code over time
+
+Go back to older versions of your repository
+
+Branch to develop and test new features
+]
+--
+
+.pull-right[
+
+```{r out.width = '20%', echo = FALSE}
+knitr::include_graphics("https://logos-download.com/wp-content/uploads/2016/09/GitHub_logo.png") 
+```
+
+Store your repository with its associated version history in the cloud
+
+Collaborate!
+]
+
+---
+
+# Ways to Git
+
+All Git commands can be executed in the command line- Command Prompt, Terminal.
+
+There are also many different user interfaces for managing Git repositories.
+
+- Dan's favourite: [GitKraken](https://www.gitkraken.com/)
+
+
+- From the makers of Sublime Text: [SublimeMerge](https://www.sublimemerge.com/)
+
+
+- From the developers of Github: [Github Desktop](https://desktop.github.com/)
+
+- [RStudio](https://rstudio.com/)
+
+.center[
+```{r out.width = '15%'}
+knitr::include_graphics("https://www.gitkraken.com/downloads/brand-assets/gitkraken-logo-light-sq.png")
+```
+```{r out.width = '15%'}
+knitr::include_graphics("https://img.stackshare.io/service/9564/sublimemerge.png")
+```
+```{r out.width = '18%'}
+knitr::include_graphics("https://desktop.github.com/images/desktop-icon.svg")
+```
+```{r out.width = '30%'}
+knitr::include_graphics("https://rstudio.com/wp-content/uploads/2018/10/RStudio-Logo-Flat.png")
+```
+]
+
+---
+
+# The **BASICS** of Git
+
+Goal here isn't to teach Git in one hour, just to familiarize you with the concepts so you can start / improve your journey
+
+See 
+
+[Happy Git and Github for the useR](https://happygitwithr.com/)
+
+[Oh Sh*t, Git!](https://ohshitgit.com/) 
+  
+  * [Dangit, Git!](https://dangitgit.com/) if you're so inclined
+
+[Oh My Git! (a Git learning game!)](https://blinry.itch.io/oh-my-git)
+
+[git documentation itself isn't bad](https://git-scm.com/docs/)
+
+
+---
+
+# The **BASICS** of Git
+
+Thankfully for most scientific collaboration across small-ish groups you usually don't need the complicated stuff
+
+95% of my worflow uses variants of
+- `commit`
+- `pull`
+- `push`
+- `branch`
+- `reset`
+
+The rest of the stuff is there for when Sh*t hits the fan or for managing really complex projects
+
+---
+
+# `git commit -m`
+
+
+
+---
 
 
 
