@@ -1,0 +1,74 @@
+---
+title: "Hake Bake"
+author: "Dan Ovando"
+date: "`r Sys.Date()`"
+output: 
+  bookdown::pdf_document2: default
+  bookdown::html_document2: default
+params:
+  results_name: ["v1.0"]
+bibliography: references.bib
+linkcolor: blue
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE)
+library(sraplus)
+library(ggplot2)
+library(tidyr)
+library(here)
+library(VAST)
+
+hake_data <- read.csv(here("data", "hake.csv")) 
+
+head(hake_data)  
+  
+hake_data <- janitor::clean_names(hake_data)
+
+results_name <- params$results_name
+
+results_path <- here("results", results_name)
+
+
+# load results
+
+load(file.path(results_path, "hake-plots.Rdata"))
+
+hake_results <- readr::read_rds(file.path(results_path, "hake-results.rds"))
+
+```
+
+# Hake Are Cool
+
+Here are some hake. Cape fur seals eat hake [@punt1995].
+
+```{r hake-plot, fig.cap="Here are some data"}
+hake_data %>% 
+  pivot_longer(c(catch, abundance_index), names_to = "variable", values_to = "value") %>% 
+  ggplot(aes(year, value)) + 
+    geom_point() + 
+    facet_wrap(~variable, scales = "free_y") + 
+  sraplus::theme_sraplus()
+```
+
+# Results
+
+We fit a model
+
+```{r pp-plot, fig.cap="Hake Model Fit"}
+
+pp_plot
+
+```
+
+Here are the results (Fig.\@ref(fig:fit-plot)).
+
+```{r fit-plot, fig.cap="Hake Model Results"}
+
+fit_plot
+
+```
+
+The most recent B/B~MSY~ value is `r round(hake_results$mean[hake_results$variable == "b_div_bmsy"],2)`
+
+# References

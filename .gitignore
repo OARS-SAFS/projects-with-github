@@ -1,9 +1,17 @@
+# results
+results/
+settings.txt
+packageDescription.txt
+VAST_*
+sraplus_tmb*
 # History files
 .Rhistory
 .Rapp.history
 
 # Session Data files
-.RData
+*.RData
+*.Rdata
+*.rds
 
 # User-specific files
 .Ruserdata
@@ -18,6 +26,7 @@
 /*.Rcheck/
 
 # RStudio files
+*.Rproj
 .Rproj.user/
 
 # produced vignettes
@@ -37,3 +46,4 @@ vignettes/*.pdf
 
 # R Environment Variables
 .Renviron
+.Rproj.user

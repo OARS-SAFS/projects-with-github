@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Making Science Reproducible</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Dan Ovando" />
+    <script src="libs/header-attrs/header-attrs.js"></script>
+    <link href="libs/remark-css/default.css" rel="stylesheet" />
+    <link href="libs/remark-css/default-fonts.css" rel="stylesheet" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Making Science Reproducible
+## NOAA Survey-centric R users group
+### Dan Ovando
+### University of Washington
+### 2020/10/8
+
+---
+
+
+
+
+
+# We Have a Problem
+
+.center[
+&lt;iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/zwRdO9_GGhY?start=694" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen&gt;&lt;/iframe&gt;
+]
+
+---
+
+# We Have a Problem
+
+.center[
+&lt;iframe width="560" height="315" src="https://www.youtube.com/embed/zwRdO9_GGhY?start=2024" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen&gt;&lt;/iframe&gt;
+]
+
+---
+
+
+# Today's Content
+
+.pull-left[
+
+- Project Oriented Workflows
+
+- Resilient paths
+
+- Package dependencies
+
+- R Markdown
+
+- Scientific collaboration with git + github
+
+
+].pull-right[
+
+&lt;img src="https://journals.plos.org/plosbiology/article/figure/image?size=large&amp;id=10.1371/journal.pbio.3000763.g003" width="80%" /&gt;
+
+]
+
+---
+
+
+
+class: center, inverse, middle
+
+
+
+class: center, middle, inverse
+# Science is all about reproducibility! 
+# Why should it stop at our code?
+
+???
+Most of us trained in things like field methods: I've had way more classes in transect methods than coding practices.
+
+Leads to methods that describe the brand of PVC pipe used but depend on a pile of code that will only work on the users computer for the week they submitted the paper, and never again
+
+we put all this work into getting the data, and then drop the ball at the step that turns all that hard work into insight. 
+
+As code becomes our primary tool, need to apply the same reprodicibility rigorous to our code that we're used to applying in our field methods
+---
+
+
+class: center, middle, inverse
+
+# the point of all of this 
+
+# is to make your life easier
+
+---
+
+# [Project-Oriented Workflows](https://www.tidyverse.org/blog/2017/12/workflow-vs-script/)
+
+&gt;This convention guarantees that the project can be moved around on your computer or onto other computers and will still “just work” &lt;footer&gt;--- Jenny Bryan&lt;/footer&gt;
+
+- All files needed to run your analysis in one folder
+  - Nested subfolders as needed
+  - **Does not have to be RStudio**
+
+- All analysis written assuming
+  - Fresh state
+  - Working directory set to project directory
+---
+
+# Project-Oriented Workflows
+see [Good Enough Practices in Scientific Computing](https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1005510)
+![https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1005510](https://github.com/super-advanced-r-fall-2019/intro/raw/master/imgs/good-enough.png)
+
+&amp; 
+ 
+---
+
+# Git and GitHub are Great
+
+.pull-left[
+
+  - Make getting to the final product easier and safer
+  - Allow others to easily use your results
+  - Allows you to easily version your results
+  
+From a pure *reproducibility* perspective though, not strictly needed
+
+- Could use email/dropbox/whatever to manage all your versions
+
+- Publish the final reproducible code and results to say figshare without git/GitHub
+
+So, we're not going to focus on git here today
+  
+
+
+].pull-right[
+
+&lt;img src="http://swcarpentry.github.io/git-novice/fig/phd101212s.png" width="100%" /&gt;
+]
+
+
+---
+
+
+# Purge `setwd` from your scripts
+
+&gt; *If the first line of your R script is*
+  
+&gt;  setwd("C:\Users\jenny\path\that\only\I\have")
+  
+&gt;  *I will come into your office and SET YOUR COMPUTER ON FIRE* 🔥.
+  
+ &gt; *If the first line of your R script is*
+  
+&gt;  rm(list = ls())
+  
+&gt;  *I will come into your office and SET YOUR COMPUTER ON FIRE* 🔥.
+&lt;footer&gt;--- Jenny Bryan&lt;/footer&gt;
+ 
+
+---
+
+
+# What's wrong with `setwd`?
+
+.pull-left[
+### Workflow
+
+*Personal decisions*
+
+* Choice of IDE (RStudio, Sublime Text, scanning handwritten notes)
+
+* CaMel or snake_case
+  - But seriously, snake_case
+  - See [tidyverse style guide](https://style.tidyverse.org/)
+
+* Your lucky coding socks
+
+* **Where the code lives**
+]
+.pull-right[
+
+### Product
+
+*What the analysis needs*
+
+* The data
+
+* Packages
+
+* Package versions
+
+* Custom functions
+
+* Scripts  to tie it all together
+
+]
+
+---
+
+## Alternatives to `setwd`
+
+Using RStudio is a simple way around this
+  
+  - Create .Rproj file in the root directory of your project
+  - I recommend ignoring these in your.gitignore file
+  
+Alternatively...
+ 
+  - Often just open a file in the project directory with R GUI/Atom/Whatever
+  
+  - If that fails, use `cd` / `setwd` from the command line/console (not in your script) when you open your analysis
+  
+  - `here` will often do the job for you
+  
+
+Using project-oriented workflow means that once you're in the working directory, everything else should work
+
+
+**It's the user's, not the code's, responsibility to make sure the working directory is set correctly** `\(^1\)`
+
+.footnote[
+[1] But do what works best for your workflow
+]
+
+---
+
+# Exorcise the paths
+
+OK, you've created a project oriented workflow
+
+Is this OK now?
+
+`my_data &lt;- read.csv("data\hake.csv")`
+
+--
+- Platform dependent
+
+- Presents some problems for R Markdown
+
+
+```r
+getwd()
+```
+
+```
+## [1] "/Users/danovan/teaching/reproducible-workflow/presentations"
+```
+
+---
+
+
+# File Paths with `here`
+
+[`here`](https://github.com/jennybc/here_here) is a great little package for managing file paths
+  - Basically file.path with a bit of sugar
+  
+  
+
+```r
+here::dr_here()
+```
+
+```
+## here() starts at /Users/danovan/teaching/reproducible-workflow, because it contains a file matching `[.]Rproj$` with contents matching `^Version: ` in the first line
+```
+
+
+`here` has a bunch of heuristics to figure out what the root of the project should be, and builds intelligent paths based on that
+
+
+```r
+here::here("data","hake.csv")
+```
+
+```
+## [1] "/Users/danovan/teaching/reproducible-workflow/data/hake.csv"
+```
+
+Looks for...
+  - An RStudio project
+  - a .git file
+  - a .here file
+  - etc.
+
+---
+
+# File Paths with `here`
+Works on some machines...
+
+```r
+
+hake &lt;- read.csv("data\hake.csv")
+```
+
+```
+## Error: '\h' is an unrecognized escape in character string starting ""data\h"
+```
+
+Works in the markdown but won't work in the command line
+
+```r
+hake &lt;- read.csv("../data/hake.csv")
+```
+
+Works on any platform and from anywhere in the project!
+
+```r
+hake &lt;- read.csv(here("data","hake.csv"))
+```
+
+What about this?
+
+
+```r
+hake &lt;- read.csv(here("home-folder","Place-With_Data","hake.csv"))
+```
+
+```
+## Warning in file(file, "rt"): cannot open file '/Users/danovan/teaching/
+## reproducible-workflow/home-folder/Place-With_Data/hake.csv': No such file or
+## directory
+```
+
+```
+## Error in file(file, "rt"): cannot open the connection
+```
+
+
+---
+
+# Package dependencies with renv
+
+OK, you now have a project oriented workflow, and you fixed your paths, what else?
+
+We've all been here...
+
+```r
+hake &lt;- as.data.table(hake)
+```
+
+```
+## Error in as.data.table(hake): could not find function "as.data.table"
+```
+
+Packages are a huge part of reproducibility - even the most "base or bust!" code usually has some package dependencies, and of course base R itself changes
+  - R 4.0 = no more `stringsAsFactors = FALSE`!!
+
+- Minimum solution: include ***all*** needed libraries at the start of your main script
+
+
+```r
+# my amazing wrapper scripts ----------------
+# load libraries
+library(here)
+library(data.table)
+```
+
+---
+
+# Package dependencies with `renv`
+
+What does this leave out?
+
+
+```r
+# my amazing wrapper scripts ----------------
+
+# load libraries
+library(here)
+library(data.table)
+```
+
+--
+
+Particularly for our kind of science-heavy packages we often depend on a *specific version* of a packages
+  - Hopefully just a minimum package version 
+  - But sometimes...
+      - we need an older version
+      - we need a specific development version 😟
+      
+Enter `renv`!
+
+---
+
+# Package dependencies with `renv`
+
+[`renv`](https://rstudio.github.io/renv/articles/renv.html) is a relatively new package manager solution from the folks at RStudio
+  - See Grant McDermott's [excellent talk](https://www.periscope.tv/grant_mcdermott/1lPJqLjlVAAGb) on it
+
+
+`renv` basically takes snapshots of
+
+  - the packages used in a project
+  - the dependencies of those packages
+  - the versions as of install time of all packages and dependencies
+    - including the source!
+  - Support for CRAN, bioconductor, github, etc. 
+
+---
+
+# Package dependencies with `renv`
+
+From a pure reproducibility standpoint `renv` is great
+
+  - Prevents you from having to manually compile a list of dependencies to include in your scripts
+  - Makes it easy to load your project on new computers
+  - Can be used as a package version time machine!
+
+From a practical perspective has some very nice tricks
+
+  - Every project has its own cache! No more "I don't update any packages because I need the ancient version of some specific package in order for my code to run"
+    - Can have `icesDatras` v1.3 in one project and v1.0 in another
+  - But, if it can share installs across projects it does so (saves on memory and install time)
+---
+
+# `renv` in action
+
+Break to see how `renv` can reproduce a complicated package on a new computer
+
+---
+
+# Docker
+
+So, we've
+
+- Created a project-oriented workflow
+- Gotten rid of `setwd` and any hard-coded paths
+- Used `renv` to manage our package dependencies
+- **RESTARTED R AND MADE SURE THAT EVERYTHING RUNS**
+
+Seems like this is a pretty full-proof path to reproducibility, except.....
+
+--
+
+Computer setup. 
+
+---
+
+# Docker
+
+Even if you have all the packages and file paths right, you need a computer to run code. 
+
+`renv` &amp; friends don't
+
+  - Make sure you have R installed
+  - Have the correct compiler tools set up
+  - Ensure you have the right support applications installed (e.g. libgdal)
+  
+This is where [Docker](https://www.docker.com/) and virtual machines come in
+  
+---
+
+# Docker
+
+Basically, Docker allows you to create a virtual machine on your computer that for example
+- Has R installed
+- Has the compiler tools setup correctly
+- Has all the other things you need installed (e.g. libgdal)
+
+Docker won't save you from fundamental hardware problems (e.g. if a given program can only run on a PC)
+  - Dedicated server + Docker...
+  
+We don't have time to cover Docker here, and unfortunately it's a bit complicated.
+  - Worth it if you're writing complicated code that needs to be reproduced on a wide variety of machines
+  - Otherwise, I'd stick with the workflow outlined here, but inclued clear instructions in the project README detailing all the non-R steps that need to be taken
+
+---
+
+
+class: center, middle, inverse
+
+# Putting things into practice
+
+---
+
+# What to do about Data?
+
+Software development has a lot we can pull directly from to increase the reproducibility of our research
+
+But, there are a few places hijacking the software pipeline for science gets clunky
+
+I push small-to-medium data to GitHub. [GitHub Large File Storage](https://docs.github.com/en/free-pro-team@latest/github/managing-large-files/about-git-large-file-storage) is also an option, but costs money 
+  
+For Bigish data
+  - Dropbox/google drive etc. are all fine options - you can query them all directly from R
+  - I usually have a check in my code to see if it's already downloaded and if not, download unzip etc. 
+  - But, a bit fragile (permissions, changing paths, etc.)
+  - Particularly for publication, generating a DOI with figshare/zenodo is a great and stable option
+  
+For Big data
+  - i.e. you can't hold it or work with it all at onces on a reasonable computer
+  - I recommend gpogle [BigQuery](https://cloud.google.com/bigquery/)
+  
+---
+
+# What to do about Results?
+
+Data are at least (in theory) static. What do we do about results?
+
+I've yet to come up with a solution that I'm really happy with, but here's my strategy
+
+1. Create an automated system to version and store results ***locally***
+  - e.g. this run is named "v1.0"
+2. I try and avoid committing results to GitHub
+  - Easy to create conflicts
+  - Takes up a lot of space
+  - Runs contrary to the entire point of reproducibility - if I do my job right future me or any collaborator can recreate the results on their own machine
+  
+Instead...
+
+3. Push code that produced results to GitHub, and created a named version
+  - That way you can always recreate those exact results
+
+4. Coauthors should be able to recreate on their end!*
+
+---
+
+# Parameterized Markdown Reports
+
+Papers are kind of a thing in science. We've made this amazing reproducible workflow to get numbers and graphs, but they don't pay the bills. 
+
+How do we make sure that our final paper is reproducible?
+  - Asking your students to go through your word doc and update all the coefficients by hand doesn't count
+
+Enter R Markdown
+
+---
+
+# R Markdown
+
+We don't have time to learn R Markdown, but here's the sales pitch
+
+  - Automatically update all figures and tables as results change
+  - Automatically update all in-text numbers as results change
+  - Automatically number figures and tables as you move them around
+    - Updates cross-references in the text
+  - Automatically format and update references with your favorite reference manager
+    - Rejected by Science? Just change the citation format, knit, and it's off to the next journal
+
+Produce, PDF, Word, or HTML all from the same source material
+  - Use Markdown, LaTeX, or Word templates to customize formatting
+  - Generates all LaTeX files
+    
+
+---
+
+# Collaborative Editing R Markdown
+
+R Markdown sounds great! But..... **what about track changes**
+
+I decide which way to go based on nature of paper
+  - Literature review with 40 authors? R markdown is probably not the way to go. 
+  
+The (ideal) R Markdown Editing process
+
+- Editor creates a branch off the main branch ("dans-edits")
+- Makes changes, submits pull request
+- Editor and lead author / team go through and approve / reject changes
+- Merge "dans-edits" back ino main branch
+
+Sounds hard, but honestly with practice it's easier than
+  - Email .docx to 40 people
+  - Get various versions of .docx and .pdf files back all with individual authors changes (some of which are on top of other people's changes)
+  - Spend the next three nights crying with a bottle of whiskey while you try and reconcile it all
+  - repeat. 
+
+
+---
+
+
+# My Publication-Oriented Workflow
+
+1. Do all the things we've talked about
+
+2. Place all functions inside a "functions" folder
+
+3. Create a wrapper script (make-my-paper.R) that calls everything needed to produce results
+
+4. Specify results name inside wrapper script
+
+5. pass parameters to R Markdown inside wrapper script and knit final product
+
+
+---
+
+
+
+# Let's see it in action
+
+running `make-reprex.R` will run through this whole process. 
+
+Walk through it to see how it all fits together
+
+---
+
+
+# In Summary....
+
+- Project oriented workflow
+  - Everything you need is contained nested folders, or downloaded by a script in a folder
+  - Can you turn your project into a zipfile?
+- Get rid of hard coded paths
+  - Barrier to future you and collaborators
+- Manage package dependencies
+  - Use something like renv
+- Generate dynamic reports with R Markdown
+  - where applicable
+- Collaborate with git + GitHub
+
+
+All materials can be accessed (and reproduced!) here https://github.com/DanOvando/reproducible-workflow
+
+Presentation can be viewed at https://danovando.github.io/reproducible-workflow/presentations/reproducibility-101#1
+
+
+---
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "dark",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
