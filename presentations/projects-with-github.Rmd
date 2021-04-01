@@ -72,7 +72,18 @@ knitr::include_graphics("https://journals.plos.org/plosbiology/article/figure/im
 
 ---
 
-# Brown M & Ma
+# Brown M & Ms
+
+.pull-left[
+
+
+] .pull-right[
+
+
+
+]
+
+
 ---
 
 # Today's Content
@@ -474,6 +485,8 @@ knitr::include_graphics("https://logos-download.com/wp-content/uploads/2016/09/G
 
 Store your repository with its associated version history in the cloud
 
+All kinds of project management helpers
+
 Collaborate!
 ]
 
@@ -664,6 +677,8 @@ And *voilà*, you have a new project on your computer initialized with git and a
 ---
 
 
+
+
 # From here
 
 Given the amount of resources out there for this, I'm not going to provide step-by-step instructions for an entire Git & Github lifestyle here.
@@ -673,6 +688,14 @@ Instead Mark Scheuerell and I are going to walk through some common collaboratio
 Think of this as a demo of the usefulness of Git + GitHub for scientific work, and a way to familiarize yourself with core concepts to then practice on your own. 
 
 ---
+
+class: center, middle, inverse
+# Exercise:
+## Create a repo on GitHub and clone it to your computer
+## Bonus: Invite a collaborator to your repo
+
+---
+
 
 # `git commit -m "it all starts here"`
 
@@ -705,23 +728,194 @@ This isn't a good idea for a few reasons...
   - Commiting results can break link between code and outcomes
   - Git isn't meant to store your global database: avoid commiting data over tens of megabytes
 
-My rule of thumb: track all things that are needed to reproduce your results, and as little of anything else as possible
+My rule of thumb: *track all things that are needed to reproduce your results, and as little of anything else as possible*
   - e.g. I ignore .Rproj files: It assumes RStudio which isn't universal, and can conflict if different users store the project in differently named folders
 
----
-
-# Your Mantra: 
-## `commit` + `pull` + `push`
-
 
 ---
 
-# Going Back in Time
+# What about Data?
+
+We're scientists! On a good day, our results depend on data. 
+
+When your data are small (~<100MB), GitHub can be a fine way to store data. Not technically the "right" way but works just fine
+  - Just be sure to load it with principles of project-oriented coding, not with "~/My Computer/Dropbox/PhD Data/data.csv"
+
+But what if your data are massive / you use the same data over amny different projects? 
+
+  - Time to move to a database..
+
+Ideally, store data in the cloud somewhere, and then have your code download the data as needed. Lots of options for this
+  - Dryad
+  - zenodo
+  - Dropbox / google drive!
+
+---
+
+class: center, middle, inverse
+# Exercise:
+## Make some changes and stage and then commit them
 
 
 ---
+
+# `commit` > `pull` > `push`
+
+OK, you have a committed change to your code, which is linked up to GitHub!
+
+Now you want to sync up your local changes with the version on GitHub
+
+1. `commit` 
+
+  - You already did that
+  
+2. `pull`
+  - `pull` "pulls" the version of the code currently on GitHub down to your computer
+  - Any new changes to the code on GitHub that don't affect any of your changes are simply incorporated into your code 
+      - e.g. if someone created and pushed a new script while you were working
+  - This creates an "up to date" version of the code that incorporates the latest version on GitHub with your newly committed changes
+
+3. `push` pushes this newly merged version of your code back to GitHub
+
+
+---
+
+
+# `commit` > `pull` > `push`
+
+Why is this order important?
+
+- If you have uncommitted changes that would be affected by the version of Github and you `pull` before you `commit`, you'll get an error like this
+
+`
+error: Your local changes to the following files 
+would be overwritten by merge:
+	presentations/projects-with-github.Rmd
+Please commit your changes or stash them before you merge.
+Aborting
+`
+
+
+
+---
+
+# `commit` > `pull` > `push`
+
+What about  `commit` > `push` > `pull`?
+
+Suppose that you made and committed some changes to the main branch, but while you were doing that someone else made some different changes to the main branch, and already commited and pushed them. 
+
+You'll see a (helpful!) error like this
+
+`
+error: failed to push some refs to 'https://github.com/YOU/REPO.git'
+hint: Updates were rejected because the remote contains work that you do
+hint: not have locally. This is usually caused by another repository pushing
+hint: to the same ref. You may want to first integrate the remote changes
+hint: (e.g., 'git pull ...') before pushing again.
+`
+
+This is Git telling you that there would be conflicts created by pushing your changes to GitHub, and it won't let you do it. 
+
+
+---
+
+# `commit` > `pull` > `push`
+
+You might also see this...
+
+`Your branch is ahead of 'origin/master' by 2 commits` or something like that, or
+
+`Your push has been rejected`...
+
+These are all symptoms of using `commit` > `push` instead of `commit` > `pull` > `push`: 
+
+Git is telling you that there are some tricky differences between the code on your computer and the version on GitHub
+
+All generally solved by `commit` > `pull` > `push`
+
+---
+
+class: center, middle, inverse
+# Exercise:
+## Make some changes and commit them then pull then push!
+
+
+---
+
 
 # Dealing with Merge Conflicts
+
+
+OK, you've run `commit` > `pull` > `push`! 
+
+For most of your day-today Git needs, this will Just Work
+  - Particularlty if it's just you / a few other collaborators
+  
+But eventually, you will get the dreaded... 
+
+`
+Auto-merging presentations/projects-with-github.Rmd
+CONFLICT (content): Merge conflict in presentations/projects-with-github.Rmd
+Automatic merge failed; fix conflicts and then commit the result.
+`
+
+This looks scary but perfectly normal and healthy!
+
+This just means that there is a difference between your local version and the GitHub version that Git doesn't know how to automatically deal with
+
+
+```{r, echo = FALSE, fig.align="center"}
+knitr::include_graphics("https://media.giphy.com/media/oey8cN3A3yNdS/giphy.gif")
+
+```
+
+
+---
+
+# Merge Conflicts
+.pull-left[
+Look like this
+
+
+```
+] .pull-right[
+From [happygitwithr](https://happygitwithr.com/git-branches.html)
+
+In this conflict, the lines between `<<<<<< HEAD:my-file.R` and `======` is your local version and between `=======` and `>>>>>>>` issue-5:my-file.R are the conflicting changes on GitHub
+
+To resolve the conflict, edit this section until it reflects the state you want in the merged result. Pick one version or the other or create a hybrid. Also remove the conflict markers `<<<<<<`, `======` and `>>>>>>`.
+
+*Save, stage, commit, pull, and push the results*
+]
+---
+
+# Merge Conflicts
+
+Files with unresolved merge conflicts will show in RStudio like this
+
+```{r, echo=FALSE}
+knitr::include_graphics(here("presentations","imgs","conflict.png"))
+```
+
+You'll have to go through the file and manually deal with all of the conflicts. 
+
+RStudio has a "find all" option (shift + command + f on mac), I'll often use that and search for all instances of `HEAD`
+
+Once you've fixed everything, stage your files, `commit` > `pull` > `push`!
+
+The commit message should be informative in this case, explaining how you decided to resolve the merge conflict
+
+This seems tough, but it's important! 
+
+You don't want Git just making tough decisions for you
+
+
+---
+
+class: center, middle, inverse
+# Exercise:
+## Create and deal with a merge conflict
 
 
 ---
@@ -729,14 +923,88 @@ My rule of thumb: track all things that are needed to reproduce your results, an
 
 # Branching Out
 
+So far, we've focused on doing all of our work on the `main` branch
+  - `main` is the new convention, you'll still see `master` on many projects
+  
+This is a fine workflow when working solo / simple teams, but branches can become really helpful
+
+Think of a branch like a parallel universe for your code where you can try out new things without breaking the code that already works
+  - If it doesn't work out, just go back to your `main` branch
+  - If you like your changes, merge them back to `main`
+  
+---
+
+# Branching Out
+
+I use branches for
+  - Testing out a better way to do something that already works
+  - Large collaborative edits (e.g. papers in R Markdown)
+  
+RStudio has shortcuts for new branches, from command line
+
+`git checkout -b cool-new-idea`
+
+Will create a new branch called `cool-new-idea` and 'checkout' that branch (switch to it)
+
+You can also create branches directly on GitHub
+  - but don't forget to you'll need to `pull` to see that branch on your local machine
+  - And you'll have to switch to it (checkout)
 
 ---
 
+
+# Pull Requests and Branches
+
+So far we've worked under the assumption that you are an administrator working on the main branch. Under these conditions you can just pull and push directly to GitHub and there isn't any "review" process
+
+Suppose though...
+  - You want to suggest changes to someone else's code
+  - You want to merge the changes you made on a branch back into your main branch
+  
+Enter the somewhat confusingly named "pull request"
+
+
+---
+
+# Pull Requests and Branches
+
+Think of a pull request as a more polite and formal `push`: 
+
+You are *requesting* that someone *pull* the changes you *pushed* into the repository
+
+GitHub helps facilitate this process 
+
+To resolve a pull request for a branch... 
+
+Once you've `comitted` > `pulled` > `pushed` changes to GitHub
+
+Go to the repo's GitHub page: If you have just pushed changes to a branch there will often be a button at the top saying "compare & pull request"
+
+You can also navigate to the "Pull Request" tab and start a new pull request there
+
+---
+
+# Pull Requests and Branches
+
+GitHub will then walk you through the process of generating and dealing with the pull request (if you have admin privileges )
+
+- Will check if the two branches can be merged automatically (lingo is to merge development branch into main branch)
+
+---
 
 # Collaborative Editing
 
 
 ---
+
+
+# Going Back in Time
+
+
+
+
+---
+
 
 # Putting it All Together
 
@@ -744,13 +1012,4 @@ My rule of thumb: track all things that are needed to reproduce your results, an
 ---
 
 
-# This is a Test On the GitHub
-
-of a test, of a test, of a test
-
-```{r}
-a <- 42
-```
-
----
 
