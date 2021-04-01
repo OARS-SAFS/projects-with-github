@@ -886,7 +886,7 @@ But eventually, you will get the dreaded...
 of a test, of a test, of a test
 
 ```{r}
-a <- 3
+a <- 32
 ```
 
 ---
