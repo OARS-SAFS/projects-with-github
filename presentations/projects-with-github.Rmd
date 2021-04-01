@@ -761,7 +761,7 @@ We're scientists! On a good day, our results depend on data.
 When your data are small (~<100MB), GitHub can be a fine way to store data. Not technically the "right" way but works just fine
   - Just be sure to load it with principles of project-oriented coding, not with "~/My Computer/Dropbox/PhD Data/data.csv"
 
-But what if your data are massive / you use the same data over amny different projects? 
+But what if your data are massive / you use the same data over many different projects? 
 
   - Time to move to a database..
 
@@ -852,8 +852,9 @@ These are all symptoms of using `commit` > `push` instead of `commit` > `pull` >
 
 Git is telling you that there are some tricky differences between the code on your computer and the version on GitHub
 
-All generally solved by `commit` > `pull` > `push`
+All generally solved by `commit` > `pull` > `push`<sup>1<sup>
 
+.footnote[<sup>1<sup> Technically when there are things to be merged a rebase]
 ---
 
 class: center, middle, inverse
@@ -1195,6 +1196,7 @@ Lee Qi's [intro to Git](https://super-advanced-r-fall-2019.github.io/git-and-git
 
 # Questions?
 
+.pull-left[
 Me: 
 
 email: danovan@uw.edu
@@ -1202,6 +1204,12 @@ email: danovan@uw.edu
 website: [danovando.com](https://www.weirdfishes.blog)
 
 twitter: [@danovand0](https://twitter.com/DanOvand0)
+] .pull-right[
 
+```{r}
+knitr::include_graphics("https://imgs.xkcd.com/comics/git.png")
+```
+
+]
 ---
 
