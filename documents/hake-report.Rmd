@@ -17,7 +17,6 @@ library(sraplus)
 library(ggplot2)
 library(tidyr)
 library(here)
-library(VAST)
 
 hake_data <- read.csv(here("data", "hake.csv")) 
 
