@@ -88,13 +88,31 @@ knitr::include_graphics("https://journals.plos.org/plosbiology/article/figure/im
 
 ---
 
-# Brown M & Ms
+# Brown M&Ms and Code
 
 .pull-left[
 
+Van Halen required a bowl of M&Ms backstage at every show, but with all the brown M&Ms removed or they wouldn't perform
+
+- Presence of brown M&Ms was a sign that bigger safety details might have been missed too<sup>1</sup>
+
+Some of the "best practices" coding things we'll talk about can seem just as silly:
+
+*Poor coding practices can be a sign of bigger problems*
+
+.footnote[
+[1] So they claim, might have just been being annoying
+]
 
 ] .pull-right[
 
+```{r}
+knitr::include_graphics("https://media.giphy.com/media/l4pTfrh1ElNzclZU4/giphy.gif")
+```
+```{r, out.width="25%"}
+knitr::include_graphics("https://i1.wp.com/www.economycandy.com/wp-content/uploads/2019/07/products-MMs-Brown-1.jpg?fit=709%2C709&ssl=1")
+
+```
 
 
 ]
