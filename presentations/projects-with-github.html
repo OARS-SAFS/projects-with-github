@@ -62,7 +62,18 @@ class: center, middle, inverse, title-slide
 
 ---
 
-# Brown M &amp; Ma
+# Brown M &amp; Ms
+
+.pull-left[
+
+
+] .pull-right[
+
+
+
+]
+
+
 ---
 
 # Today's Content
@@ -440,6 +451,8 @@ Branch to develop and test new features
 
 Store your repository with its associated version history in the cloud
 
+All kinds of project management helpers
+
 Collaborate!
 ]
 
@@ -620,6 +633,8 @@ And *voilà*, you have a new project on your computer initialized with git and a
 ---
 
 
+
+
 # From here
 
 Given the amount of resources out there for this, I'm not going to provide step-by-step instructions for an entire Git &amp; Github lifestyle here.
@@ -629,6 +644,14 @@ Instead Mark Scheuerell and I are going to walk through some common collaboratio
 Think of this as a demo of the usefulness of Git + GitHub for scientific work, and a way to familiarize yourself with core concepts to then practice on your own. 
 
 ---
+
+class: center, middle, inverse
+# Exercise:
+## Create a repo on GitHub and clone it to your computer
+## Bonus: Invite a collaborator to your repo
+
+---
+
 
 # `git commit -m "it all starts here"`
 
@@ -661,23 +684,114 @@ This isn't a good idea for a few reasons...
   - Commiting results can break link between code and outcomes
   - Git isn't meant to store your global database: avoid commiting data over tens of megabytes
 
-My rule of thumb: track all things that are needed to reproduce your results, and as little of anything else as possible
+My rule of thumb: *track all things that are needed to reproduce your results, and as little of anything else as possible*
   - e.g. I ignore .Rproj files: It assumes RStudio which isn't universal, and can conflict if different users store the project in differently named folders
 
----
-
-# Your Mantra: 
-## `commit` + `pull` + `push`
-
 
 ---
 
-# Going Back in Time
+# What about Data?
+
+We're scientists! On a good day, our results depend on data. 
+
+When your data are small (~&lt;100MB), GitHub can be a fine way to store data. Not technically the "right" way but works just fine
+  - Just be sure to load it with principles of project-oriented coding, not with "~/My Computer/Dropbox/PhD Data/data.csv"
+
+But what if your data are massive / you use the same data over amny different projects? 
+
+  - Time to move to a database..
+
+Ideally, store data in the cloud somewhere, and then have your code download the data as needed. Lots of options for this
+  - Dryad
+  - zenodo
+  - Dropbox / google drive!
+
+---
+
+class: center, middle, inverse
+# Exercise:
+## Make some changes and commit them
 
 
 ---
+
+# `commit` + `pull` + `push`
+
+OK, you have a committed change to your code, which is linked up to GitHub!
+
+Now you want to sync up your local changes with the version on GitHub
+
+1. `commit` 
+
+  - You already did that
+  
+2. `pull`
+  - `pull` "pulls" the version of the code currently on GitHub down to your computer
+  - Any new changes to the code on GitHub that don't affect any of your changes are simply incorporated into your code 
+      - e.g. if someone created and pushed a new script while you were working
+  - This creates an "up to date" version of the code that incorporates the latest version on GitHub with your newly committed changes
+
+3. `push` pushes this newly merged version of your code back to GitHub
+
+
+---
+
+
+# `commit` + `pull` + `push`
+
+Why is this order important?
+
+- If you have uncommitted changes that would be affected by the version of Github and you `pull` before you `commit`, you'll get an error like this
+
+`
+error: Your local changes to the following files 
+would be overwritten by merge:
+	presentations/projects-with-github.Rmd
+Please commit your changes or stash them before you merge.
+Aborting
+`
+
+
+
+---
+
+# `commit` + `pull` + `push`
+
+What about  `commit` + `push` + `pull`?
+
+Suppose that you made and committed some changes to the main branch, but while you were doing that someone else made some different changes to the main branch, and already commited and pushed them. 
+
+You'll see a (helpful!) error like this
+
+`
+error: failed to push some refs to 'https://github.com/YOU/REPO.git'
+hint: Updates were rejected because the remote contains work that you do
+hint: not have locally. This is usually caused by another repository pushing
+hint: to the same ref. You may want to first integrate the remote changes
+hint: (e.g., 'git pull ...') before pushing again.
+`
+
+This is Git telling you that there would be conflicts created by pushing your changes to GitHub, and it won't let you do it. 
+
+
+---
+
+# `commit` + `pull` + `push`
+
+You might also see this...
+
+`Your branch is ahead of 'origin/master' by 2 commits` or something like that
+
+---
+
 
 # Dealing with Merge Conflicts
+
+
+---
+
+
+# Going Back in Time
 
 
 ---
