@@ -749,7 +749,7 @@ My rule of thumb: track all things that are needed to reproduce your results, an
 of a test, of a test, of a test
 
 ```{r}
-a <- 2
+a <- 42
 ```
 
 ---
