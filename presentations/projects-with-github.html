@@ -811,7 +811,6 @@ For most of your day-today Git needs, this will Just Work
 But eventually, you will get the dreaded... 
 
 `
-/usr/local/bin/git pull
 Auto-merging presentations/projects-with-github.Rmd
 CONFLICT (content): Merge conflict in presentations/projects-with-github.Rmd
 Automatic merge failed; fix conflicts and then commit the result.
@@ -820,6 +819,9 @@ Automatic merge failed; fix conflicts and then commit the result.
 This looks scary but perfectly normal and healthy!
 
 This just means that there is a difference between your local version and the GitHub version that Git doesn't know how to automatically deal with
+
+
+&lt;img src="https://media.giphy.com/media/oey8cN3A3yNdS/giphy.gif" style="display: block; margin: auto;" /&gt;
 
 
 ---
@@ -861,10 +863,20 @@ You'll have to go through the file and manually deal with all of the conflicts.
 
 RStudio has a "find all" option (shift + command + f on mac), I'll often use that and search for all instances of `HEAD`
 
+Once you've fixed everything, stage your files, `commit` &gt; `pull` &gt; `push`!
+
+The commit message should be informative in this case, explaining how you decided to resolve the merge conflict
+
+This seems tough, but it's important! 
+
+You don't want Git just making tough decisions for you
+
 
 ---
 
-# Going Back in Time
+class: center, middle, inverse
+# Exercise:
+## Create and deal with a merge conflict
 
 
 ---
@@ -872,14 +884,72 @@ RStudio has a "find all" option (shift + command + f on mac), I'll often use tha
 
 # Branching Out
 
+So far, we've focused on doing all of our work on the `main` branch
+  - `main` is the new convention, you'll still see `master` on many projects
+  
+This is a fine workflow when working solo / simple teams, but branches can become really helpful
+
+Think of a branch like a parallel universe for your code where you can try out new things without breaking the code that already works
+  - If it doesn't work out, just go back to your `main` branch
+  - If you like your changes, merge them back to `main`
+  
+---
+
+# Branching Out
+
+I use branches for
+  - Testing out a better way to do something that already works
+  - Large collaborative edits (e.g. papers in R Markdown)
+  
+RStudio has shortcuts for new branches, from command line
+
+`git checkout -b cool-new-idea`
+
+Will create a new branch called `cool-new-idea` and 'checkout' that branch (switch to it)
+
+You can also create branches directly on GitHub
+  - but don't forget to you'll need to `pull` to see that branch on your local machine
+  - And you'll have to switch to it (checkout)
 
 ---
 
+
+# Pull Requests and Branches
+
+So far we've worked under the assumption that you are an administrator working on the main branch. Under these conditions you can just pull and push directly to GitHub and there isn't any "review" process
+
+Suppose though...
+  - You want to suggest changes to someone else's code
+  - You want to merge the changes you made on a branch back into your main branch
+  
+Enter the somewhat confusingly named "pull request"
+
+
+---
+
+# Pull Requests and Branches
+
+Think of a pull request as a more polite and formal `push`: 
+
+You are *requesting* that someone *pull* the changes you *pushed* into the repository
+
+GitHub helps facilitate this process 
+
+---
 
 # Collaborative Editing
 
 
 ---
+
+
+# Going Back in Time
+
+
+
+
+---
+
 
 # Putting it All Together
 
@@ -890,12 +960,6 @@ RStudio has a "find all" option (shift + command + f on mac), I'll often use tha
 
 of a test, of a test, of a test
 
-
-```
-## Error: &lt;text&gt;:1:1: unexpected input
-## 1: &lt;&lt;
-##     ^
-```
 
 ---
 
