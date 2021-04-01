@@ -119,7 +119,7 @@ class: center, middle, inverse
 # Does This Look Familiar?
 
 ```{r, echo = FALSE}
-knitr::include_graphics(here("presentations","imgs","oh-my.png"))
+knitr::include_graphics("https://raw.githubusercontent.com/OARS-SAFS/projects-with-github/main/presentations/imgs/oh-my.png")
 ```
 
 
@@ -140,8 +140,7 @@ knitr::include_graphics(here("presentations","imgs","oh-my.png"))
 ].pull-right[
 
 ```{r, echo = FALSE}
-knitr::include_graphics(here("presentations","imgs","oh-my.png"))
-
+knitr::include_graphics("https://raw.githubusercontent.com/OARS-SAFS/projects-with-github/main/presentations/imgs/oh-my.png")
 ```
 
 ]
@@ -164,8 +163,7 @@ knitr::include_graphics(here("presentations","imgs","oh-my.png"))
 ].pull-right[
 
 ```{r, echo = FALSE}
-knitr::include_graphics(here("presentations","imgs","oh-my.png"))
-
+knitr::include_graphics("https://raw.githubusercontent.com/OARS-SAFS/projects-with-github/main/presentations/imgs/oh-my.png")
 ```
 
 ]
@@ -197,7 +195,7 @@ see [Good Enough Practices in Scientific Computing](https://journals.plos.org/pl
 # Project Oriented Workflow
 
 ```{r, echo = FALSE}
-knitr::include_graphics(here("presentations","imgs","better.png"))
+knitr::include_graphics(knitr::include_graphics("https://raw.githubusercontent.com/OARS-SAFS/projects-with-github/main/presentations/imgs/better.png"))
 
 ```
 
@@ -421,14 +419,6 @@ Git is a software package for tracking changes in files in an organized way.
 
 ---
 
-
-# Why use version control?
-
-```{r out.width = '50%'}
-knitr::include_graphics("http://swcarpentry.github.io/git-novice/fig/phd101212s.png") 
-```
-
----
 
 .pull-left[
 # Git
