@@ -877,17 +877,7 @@ knitr::include_graphics("https://media.giphy.com/media/oey8cN3A3yNdS/giphy.gif")
 .pull-left[
 Look like this
 
-```
-<<<<<<< HEAD:my-file.R
 
-a <- 2 + 2
-
-
-=======
-
-a <- 2 + 3
-
->>>>>>> issue-5:my-file.R
 ```
 ] .pull-right[
 From [happygitwithr](https://happygitwithr.com/git-branches.html)
@@ -1021,13 +1011,5 @@ GitHub will then walk you through the process of generating and dealing with the
 
 ---
 
-# This is a Test On the GitHub
 
-of a test, of a test, of a test
-
-```{r, error=TRUE}
-a <- 32
-
-```
----
 
