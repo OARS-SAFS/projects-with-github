@@ -710,7 +710,7 @@ Ideally, store data in the cloud somewhere, and then have your code download the
 
 class: center, middle, inverse
 # Exercise:
-## Make some changes and commit them
+## Make some changes and stage and then commit them
 
 
 ---
@@ -810,10 +810,59 @@ For most of your day-today Git needs, this will Just Work
   
 But eventually, you will get the dreaded... 
 
- ***MERGE CONFLICT***
+`
+/usr/local/bin/git pull
+Auto-merging presentations/projects-with-github.Rmd
+CONFLICT (content): Merge conflict in presentations/projects-with-github.Rmd
+Automatic merge failed; fix conflicts and then commit the result.
+`
+
+This looks scary but perfectly normal and healthy!
+
+This just means that there is a difference between your local version and the GitHub version that Git doesn't know how to automatically deal with
+
 
 ---
 
+# Merge Conflicts
+.pull-left[
+Look like this
+
+```
+&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD:my-file.R
+
+a &lt;- 2 + 2
+
+
+=======
+
+a &lt;- 2 + 3
+
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; issue-5:my-file.R
+```
+] .pull-right[
+From [happygitwithr](https://happygitwithr.com/git-branches.html)
+
+In this conflict, the lines between `&lt;&lt;&lt;&lt;&lt;&lt; HEAD:my-file.R` and `======` is your local version and between `=======` and `&gt;&gt;&gt;&gt;&gt;&gt;&gt;` issue-5:my-file.R are the conflicting changes on GitHub
+
+To resolve the conflict, edit this section until it reflects the state you want in the merged result. Pick one version or the other or create a hybrid. Also remove the conflict markers `&lt;&lt;&lt;&lt;&lt;&lt;`, `======` and `&gt;&gt;&gt;&gt;&gt;&gt;`.
+
+*Save, stage, commit, pull, and push the results*
+]
+---
+
+# Merge Conflicts
+
+Files with unresolved merge conflicts will show in RStudio like this
+
+![](/Users/danovan/projects/projects-with-github/presentations/imgs/conflict.png)&lt;!-- --&gt;
+
+You'll have to go through the file and manually deal with all of the conflicts. 
+
+RStudio has a "find all" option (shift + command + f on mac), I'll often use that and search for all instances of `HEAD`
+
+
+---
 
 # Going Back in Time
 
@@ -842,6 +891,11 @@ But eventually, you will get the dreaded...
 of a test, of a test, of a test
 
 
+```
+## Error: &lt;text&gt;:1:1: unexpected input
+## 1: &lt;&lt;
+##     ^
+```
 
 ---
 
