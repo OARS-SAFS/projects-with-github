@@ -5,8 +5,17 @@
     <meta charset="utf-8" />
     <meta name="author" content="Dan Ovando" />
     <script src="libs/header-attrs/header-attrs.js"></script>
-    <link href="libs/remark-css/default.css" rel="stylesheet" />
-    <link href="libs/remark-css/default-fonts.css" rel="stylesheet" />
+    <script src="libs/clipboard/clipboard.min.js"></script>
+    <link href="libs/shareon/shareon.min.css" rel="stylesheet" />
+    <script src="libs/shareon/shareon.min.js"></script>
+    <link href="libs/xaringanExtra-shareagain/shareagain.css" rel="stylesheet" />
+    <script src="libs/xaringanExtra-shareagain/shareagain.js"></script>
+    <script src="libs/js-cookie/js.cookie.js"></script>
+    <script src="libs/peerjs/peerjs.min.js"></script>
+    <script src="libs/tiny.toast/toast.min.js"></script>
+    <link href="libs/xaringanExtra-broadcast/broadcast.css" rel="stylesheet" />
+    <script src="libs/xaringanExtra-broadcast/broadcast.js"></script>
+    <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
   </head>
   <body>
     <textarea id="source">
@@ -19,6 +28,11 @@ class: center, middle, inverse, title-slide
 ### 2020/4/5
 
 ---
+
+
+
+
+
 
 
 
@@ -830,6 +844,7 @@ This just means that there is a difference between your local version and the Gi
 .pull-left[
 Look like this
 
+
 ```
 &lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD:my-file.R
 
@@ -842,6 +857,8 @@ a &lt;- 2 + 3
 
 &gt;&gt;&gt;&gt;&gt;&gt;&gt; issue-5:my-file.R
 ```
+
+
 ] .pull-right[
 From [happygitwithr](https://happygitwithr.com/git-branches.html)
 
@@ -951,9 +968,20 @@ GitHub will then walk you through the process of generating and dealing with the
 
 - Will check if the two branches can be merged automatically (lingo is to merge development branch into main branch)
 
+- Allows you to resolve any conflicts directly in GitHub (and will point them out to you)
+
+- Allows you to "squash" commits, for example deleting all of those commit messages that just said "some changes" and replacing them with a clear summary of what the changes in the branch did
+
+Once this is done, you submit the pull request, and if you have admin privilges you can then merge and close the pull request then and there. 
+
+It's easiest to delete the branch when you're done with it
+  - Otherwise need to get good at rebasing branches to for example keep using a branch called `dev`: A good thing to do but not always beginner friendly
+
 ---
 
-# Collaborative Editing
+class: center, middle, inverse
+# Exercise:
+## Create a branch, make changes to it, then merge back to main branch by a pull request
 
 
 ---
@@ -961,23 +989,153 @@ GitHub will then walk you through the process of generating and dealing with the
 
 # Going Back in Time
 
+.pull-left[
 
+We have all given thanks for the "undo" feature at some time. 
+
+Think of Git as a full time-machine for your code!
+ 
+  - You can easily roll your code back to specific commits
+ 
+  - You can keep your changes (basically un-commit)
+ 
+  - Or discard your changes (roll back)
+  
+Clear commit messages make it very easy to go back to specific events
+  - Reset to commit "Model finally converges"
+
+].pull-right[
+![](https://media.giphy.com/media/RmfhMeDyN0bVYBFKNR/giphy.gif)&lt;!-- --&gt;
+
+
+]
 
 
 ---
 
+
+# Going Back in Time
+.pull-left[
+You can revert back to previous commits from the command line. 
+
+If I'm being honest, I use [GitKraken](https://www.gitkraken.com/) for these kinds of more complex operations
+
+  - If I need to go back in time it's because I've *royally* messed something up
+  
+  - The last thing I want to do at that point is try and remember all the git commands for reverting to a commit / how in the world to exit `vim`
+  
+Git can be hard sometimes! If your job isn't to be a software developer,it's OK to take shortcuts sometimes
+].pull-right[
+
+![](http://www.reactiongifs.com/r/huge-tiny-.gif)&lt;!-- --&gt;
+
+]
+---
+
+
+# Going Back in Time
+
+GitHub itself acts like a time capsule for your code. 
+
+You can navigate through the history of particular files on GitHub
+
+You can view the entire repo at a particular commit
+  - And then download it and start over as a sort of manual time machine if needed... 
+  
+You can also create "Releases". This is usually used for software development, e.g. v1.0
+
+But it's really handy for science too! 
+
+e.g. create versions at...
+1. Initial submission to journal
+2. Post-Major Revisions from Reviewer #2
+3. Published version
+
+All of which can be downloaded in total as needed!
+---
+
+# In Summary....
+
+.pull-left[
+
+We just covered *a lot* of information
+  - There are entire courses / books etc. on this topic
+
+But remember, most science projects are simple relative to say managing the code behind Google Earth
+
+90% of the time...
+  - `commit`
+  - `pull`
+  - `push`
+
+With sprinkles of branches, pull requests and merge conflict resolution will do it
+
+].pull-right[
+
+
+![](https://media.giphy.com/media/3o6gDSdED1B5wjC2Gc/giphy.gif)&lt;!-- --&gt;
+
+
+]
+
+---
+
+# Git &amp; GitHub: It's worth it
+
+This may also seem like a LOT of complex work compared to just throwing everything into Google Drive. 
+
+With a little bit of practice it gets easy though and it really pays off
+
+Project-oriented workflows + Git &amp; GitHub...
+
+- Clearly keep track of the history of your project
+
+- Makes it easy to try new things without breaking your project
+
+- Allows you to easily and safely collaborate
+
+- Allows others (and yourself) to easily reproduce your results in the future and on different machines
+
+
+.center[*As science increasingly depends on software, &lt;br&gt; it's just the right thing to do*]
+
+---
 
 # Putting it All Together
 
+See `make-reprex.R` for an example of using a project-oriented workflow together with Git, GitHub, `renv` (a topic for another day) to allow for near automatic reproducibility of a project. 
 
 ---
 
-# This is a Test On the GitHub
+# Resources
 
-of a test, of a test, of a test
+.pull-left[[Happy Git and Github for the useR](https://happygitwithr.com/)
 
+[Oh Sh*t, Git!](https://ohshitgit.com/) 
+  
+  * [Dangit, Git!](https://dangitgit.com/) if you're so inclined
 
+[git documentation itself isn't bad](https://git-scm.com/docs/)
+
+Mark Scheurell's Lecture Materials on [GitHub](https://fish497.github.io/website/lectures/week_02/lec_04_intro_github.html) and [Git](https://fish497.github.io/website/lectures/week_02/lec_05_intro_git.html)
+
+[Oh My Git! (a Git learning game!)](https://blinry.itch.io/oh-my-git)
+
+Lee Qi's [intro to Git](https://super-advanced-r-fall-2019.github.io/git-and-github/presentations/git-and-github#1)
+]
+.pull-right[
+## Fun Resources
+
+[Commits From Last Night](http://www.commitlogsfromlastnight.com/)
+
+[git manual page generator](https://git-man-page-generator.lokaltog.net/)
+
+[starwars intro you commit history!](http://starlogs.net/#DanOvando/Global-Fishery-Potential)
+]
 ---
+
+
+
 
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
