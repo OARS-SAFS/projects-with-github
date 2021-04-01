@@ -1131,13 +1131,9 @@ All of which can be downloaded in total as needed!
 
 # GitHub Issues
 
-GitHub is a massive place, with a crazy amount of features
+You can do project management, sync up continuous integration for testing, host webpages, submit homework, and who all kinds of other stuff all on GitHub
 
-You can do project management, sync up continuous integration for testing, host webpages, submit homework, and who all kinds of other stuff. 
-
-One really nice feature we'll demonstrate here are [Issues](https://guides.github.com/features/issues/) 
-
-Think of issues as a to-do list stored in GitHub that can be explicitly linked to lines of code / commits / pull requests
+Issues are like as a to-do list stored in GitHub that can be explicitly linked to lines of code / commits / pull requests
 
 I use them to
 
@@ -1145,8 +1141,18 @@ I use them to
   - bugs that need fixing
   - features I want to add
 - Assign tasks to collaborator
-- Track the general workflow of a project
-- Home maintence tasks in the Scheuerell household 🤓
+- Home maintenance tasks in the Scheuerell household 🤓
+
+Fun feature, you can close issues directly from commit messages!
+
+`git commit -m "Fixed that bug. Closes #3"`
+
+When pushed will close Issue #3 on GitHub!
+
+---
+
+# GitHub Issues
+
 
 ---
 
