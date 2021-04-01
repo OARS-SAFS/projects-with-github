@@ -25,7 +25,14 @@ In preparation for going over the materials here please
     [here](https://happygitwithr.com/hello-git.html) and
     [here](https://fish497.github.io/website/lectures/week_02/lec_05_intro_git.html)
 
-The presentation (still a work in progress) can be viewed at
+The presentation (still a work in progress) can be viewed
+[here](https://oars-safs.github.io/projects-with-github/presentations/projects-with-github)
+
+We will be going over come materials covered in Richard McElreath’s
+[Science as Amateur Software Development](https://youtu.be/zwRdO9_GGhY)
+talk. It’s about an hour long if you’d like to watch the whole thing
+before the workshop, but is not required (but highly recommended in
+general).
 
 ## Bonus Materials
 
@@ -54,7 +61,7 @@ I intentionally included some code that requires particular computer
 settings in the make-reprex.R example included in this repo. This is
 intended to demonstrate both the ability of `renv` to keep complex
 dependencies, like particular branches of in development packages, in
-check, but also the limittions: it won’t make sure you have Rtools
+check, but also the limitations: it won’t make sure you have Rtools
 installed correctly.
 
 Here are some tips to set up your computer to make-reprex.R
