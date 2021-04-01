@@ -984,6 +984,22 @@ You are *requesting* that someone *pull* the changes you *pushed* into the repos
 
 GitHub helps facilitate this process 
 
+To resolve a pull request for a branch... 
+
+Once you've `comitted` > `pulled` > `pushed` changes to GitHub
+
+Go to the repo's GitHub page: If you have just pushed changes to a branch there will often be a button at the top saying "compare & pull request"
+
+You can also navigate to the "Pull Request" tab and start a new pull request there
+
+---
+
+# Pull Requests and Branches
+
+GitHub will then walk you through the process of generating and dealing with the pull request (if you have admin privileges )
+
+- Will check if the two branches can be merged automatically (lingo is to merge development branch into main branch)
+
 ---
 
 # Collaborative Editing
