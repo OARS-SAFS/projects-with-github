@@ -2,6 +2,7 @@
 title: "Project-Oriented Coding "
 subtitle: "SAFS OARS Learning Session"
 author: "Dan Ovando"
+email: danovan@uw.edu
 institute: "University of Washington"
 date: "2020/4/5"
 output:
@@ -210,10 +211,13 @@ knitr::include_graphics("https://raw.githubusercontent.com/OARS-SAFS/projects-wi
 ---
 
 # The Solution: Project-Oriented Workflows
-see [Good Enough Practices in Scientific Computing](https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1005510)
-![https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1005510](https://github.com/super-advanced-r-fall-2019/intro/raw/master/imgs/good-enough.png)
+.pull-left[see [Good Enough Practices in Scientific Computing](https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1005510)]
+.pull-right[
+```{r, echo=FALSE}
+knitr::include_graphics("https://github.com/super-advanced-r-fall-2019/intro/raw/master/imgs/good-enough.png")
+```
+]
 
-& 
  
 ---
 
@@ -287,16 +291,13 @@ knitr::include_graphics(knitr::include_graphics("https://raw.githubusercontent.c
 
 Using RStudio is a simple way around this
   
-  - Create .Rproj file in the root directory of your project
-  - I recommend ignoring these in your.gitignore file
-  
+  - Creates .Rproj file in the root directory of your project
+
 Alternatively...
  
   - Often just open a file in the project directory with R GUI/Atom/Whatever
   
   - If that fails, use `cd` / `setwd` from the command line/console (not in your script) when you open your analysis
-  
-  - `here` will often do the job for you
   
 
 Using project-oriented workflow means that once you're in the working directory, everything else should work
@@ -357,25 +358,25 @@ Looks for...
 
 # File Paths with `here`
 Works on some machines...
-```{r, error=TRUE}
+```{r, error=TRUE, echo = TRUE}
 
 hake <- read.csv("data\hake.csv")
 
 ```
 
 Works in the markdown but won't work in the command line
-```{r}
+```{r, error = TRUE, echo = TRUE}
 hake <- read.csv("../data/hake.csv")
 ```
 
 Works on any platform and from anywhere in the project!
-```{r}
+```{r, echo = TRUE}
 hake <- read.csv(here("data","hake.csv"))
 ```
 
 What about this?
 
-```{r, error = TRUE}
+```{r, error = TRUE, echo = TRUE}
 hake <- read.csv(here("home-folder","Place-With_Data","hake.csv"))
 ```
 
@@ -408,11 +409,10 @@ Now we'll see how Git + GitHub can help make this happen
 
 - Gives you a time machine for your results
 
-But, at first glance it seems like a lot of work that couldbe done easier with Google Drive / email / track changes
 
 We'll try and demystify it a bit today
 
-**Git Materials largely drawn with permission from Lee Qi's excellent intro available [here](https://github.com/super-advanced-r-fall-2019/git-and-github) **
+*Git Materials largely drawn with permission from Lee Qi's excellent intro available [here](https://github.com/super-advanced-r-fall-2019/git-and-github)*
   
 
 
@@ -595,8 +595,7 @@ We don't have time to solve this today, so see those resources. From here on I w
 ---
 
 
-# Initializing a project with git...
-## The manual way
+# Manual Git Setup
 
 Chances are if you're doing it this way you don't need my help. 
 
@@ -732,6 +731,12 @@ You can of course save your code as you go along. But once you get your code to 
 
 When you "commit", git takes a snapshot of all the files it is charged with tracking in your repository, gives it a timestamp and a unique identifier paired with your commit message. 
 
+
+Don't be afraid to commit often and early!
+
+  - "Added one comment to code" is probably too often
+  - "Started and finished dissertation' is too broad
+  - "First working version of the movement function" is a nice medium
 ---
 
 # What Should you Commit?
@@ -865,8 +870,7 @@ class: center, middle, inverse
 OK, you've run `commit` > `pull` > `push`! 
 
 For most of your day-today Git needs, this will Just Work
-  - Particularlty if it's just you / a few other collaborators
-  
+
 But eventually, you will get the dreaded... 
 
 `
@@ -923,7 +927,7 @@ To resolve the conflict, edit this section until it reflects the state you want 
 Files with unresolved merge conflicts will show in RStudio like this
 
 ```{r, echo=FALSE}
-knitr::include_graphics(here("presentations","imgs","conflict.png"))
+knitr::include_graphics("https://raw.githubusercontent.com/OARS-SAFS/projects-with-github/main/presentations/imgs/conflict.png")
 ```
 
 You'll have to go through the file and manually deal with all of the conflicts. 
@@ -1041,8 +1045,6 @@ class: center, middle, inverse
 
 .pull-left[
 
-We have all given thanks for the "undo" feature at some time. 
-
 Think of Git as a full time-machine for your code!
  
   - You can easily roll your code back to specific commits
@@ -1052,7 +1054,7 @@ Think of Git as a full time-machine for your code!
   - Or discard your changes (roll back)
   
 Clear commit messages make it very easy to go back to specific events
-  - Reset to commit "Model finally converges"
+  - Reset to commit "Model finally converges" is easier than "Some Changes"
 
 ].pull-right[
 ```{r, echo = FALSE}
@@ -1070,13 +1072,13 @@ knitr::include_graphics("https://media.giphy.com/media/RmfhMeDyN0bVYBFKNR/giphy.
 .pull-left[
 You can revert back to previous commits from the command line. 
 
-If I'm being honest, I use [GitKraken](https://www.gitkraken.com/) for these kinds of more complex operations
+Honestly, I use [GitKraken](https://www.gitkraken.com/) for these kinds of more complex operations
 
   - If I need to go back in time it's because I've *royally* messed something up
   
   - The last thing I want to do at that point is try and remember all the git commands for reverting to a commit / how in the world to exit `vim`
   
-Git can be hard sometimes! If your job isn't to be a software developer,it's OK to take shortcuts sometimes
+Git can be hard! If your job isn't to be a software developer,it's OK to take shortcuts sometimes
 ].pull-right[
 
 ```{r echo = FALSE}
@@ -1191,5 +1193,15 @@ Lee Qi's [intro to Git](https://super-advanced-r-fall-2019.github.io/git-and-git
 ---
 
 
+# Questions?
 
+Me: 
+
+email: danovan@uw.edu
+
+website: [danovando.com](https://www.weirdfishes.blog)
+
+twitter: [@danovand0](https://twitter.com/DanOvand0)
+
+---
 
