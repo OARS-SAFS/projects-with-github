@@ -759,7 +759,7 @@ class: center, middle, inverse
 
 ---
 
-# `commit` + `pull` + `push`
+# `commit` > `pull` > `push`
 
 OK, you have a committed change to your code, which is linked up to GitHub!
 
@@ -781,7 +781,7 @@ Now you want to sync up your local changes with the version on GitHub
 ---
 
 
-# `commit` + `pull` + `push`
+# `commit` > `pull` > `push`
 
 Why is this order important?
 
@@ -799,9 +799,9 @@ Aborting
 
 ---
 
-# `commit` + `pull` + `push`
+# `commit` > `pull` > `push`
 
-What about  `commit` + `push` + `pull`?
+What about  `commit` > `push` > `pull`?
 
 Suppose that you made and committed some changes to the main branch, but while you were doing that someone else made some different changes to the main branch, and already commited and pushed them. 
 
@@ -820,17 +820,41 @@ This is Git telling you that there would be conflicts created by pushing your ch
 
 ---
 
-# `commit` + `pull` + `push`
+# `commit` > `pull` > `push`
 
 You might also see this...
 
-`Your branch is ahead of 'origin/master' by 2 commits` or something like that
+`Your branch is ahead of 'origin/master' by 2 commits` or something like that, or
+
+`Your push has been rejected`...
+
+These are all symptoms of using `commit` > `push` instead of `commit` > `pull` > `push`: 
+
+Git is telling you that there are some tricky differences between the code on your computer and the version on GitHub
+
+All generally solved by `commit` > `pull` > `push`
+
+---
+
+class: center, middle, inverse
+# Exercise:
+## Make some changes and commit them then pull then push!
+
 
 ---
 
 
 # Dealing with Merge Conflicts
 
+
+OK, you've run `commit` > `pull` > `push`! 
+
+For most of your day-today Git needs, this will Just Work
+  - Particularlty if it's just you / a few other collaborators
+  
+But eventually, you will get the dreaded... 
+
+ ***MERGE CONFLICT***
 
 ---
 
