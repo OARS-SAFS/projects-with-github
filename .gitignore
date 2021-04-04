@@ -1,7 +1,10 @@
 # results
-results/
+# ignore everything in the results folder: why is this a good(ish) idea?
+results/ 
 settings.txt
 packageDescription.txt
+# you can use regular expressions in a .gitignore file to for example ignore anything that starts
+# with "VAST_"
 VAST_*
 sraplus_tmb*
 # History files

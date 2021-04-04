@@ -38,6 +38,24 @@ class: center, middle, inverse, title-slide
 
 
 
+# OARS Learning Sessions
+
+The goal as I see it: 
+
+.center[*A welcoming space to share and learn about  tools for creating &lt;br&gt; Open and Reproducible Science*]
+
+- Inspired by UCSB's [eco-data-science](https://eco-data-science.github.io/) community
+
+- Monthly(?) meetings led by volunteers looking to share something they learned
+  - You don't have to be an expert! Just one day ahead of the average participant
+  - Teaching is a great way to learn... 
+
+- Thanks to the OARS team, in particular Helena McMonagle, for helping get this going
+
+Communication: Slack? Listserve? Will send email poll shortly
+
+---
+
 # We Have a Problem
 
 .center[
@@ -655,6 +673,12 @@ Some tips
 
 ---
 
+class: center, middle, inverse
+
+# Exercies: Create a new repository on GitHub with a .gitignore file
+
+---
+
 
 # Coming Down from the Cloud
 
@@ -732,6 +756,58 @@ This isn't a good idea for a few reasons...
 
 My rule of thumb: *track all things that are needed to reproduce your results, and as little of anything else as possible*
   - e.g. I ignore .Rproj files: It assumes RStudio which isn't universal, and can conflict if different users store the project in differently named folders
+
+
+---
+
+# Sometimes Ignorance is Best
+
+.pull-left[
+
+A .gitignore files tells Git what *not* to track
+
+For reasons I don't know it is a hidden file by default: you won't see it if you navigate to your folder in say Finder, but will see it in RStudio
+
+You can get very creative with the .gitignore file
+  - ignore entire folders
+  - Ignore everything *except* something with `!`
+  - Ignore files that contain a specific text string
+  - Ignore particular file types
+
+].pull-right[
+```
+# results
+# ignore results folder
+# why is this a good(ish) idea?
+results/ 
+settings.txt
+packageDescription.txt
+# you can use regular expressions in a 
+# .gitignore file:
+# ignore all with with "VAST_"
+VAST_*
+sraplus_tmb*
+# History files
+.Rhistory
+.Rapp.history
+
+# Session Data files
+*.RData
+*.Rdata
+*.rds
+
+# User-specific files
+.Ruserdata
+
+# Example code in package build process
+*-Ex.R
+
+# Output files from R CMD build
+/*.tar.gz
+
+```
+]
+
 
 
 ---
@@ -1106,9 +1182,9 @@ When pushed will close Issue #3 on GitHub!
 
 ---
 
-# GitHub Issues
+class: center, middle, inverse
 
-
+# Exercise: Create, assign, resolve, and close a GitHub issue
 ---
 
 # In Summary....
@@ -1151,7 +1227,7 @@ Project-oriented workflows + Git &amp; GitHub...
 
 - Allows you to easily and safely collaborate
 
-- Allows others (and yourself) to easily reproduce your results in the future and on different machines
+- Allows others (and yourself) to easily reproduce your results
 
 
 .center[*As science increasingly depends on software, &lt;br&gt; it's just the right thing to do*]
